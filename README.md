@@ -10,4 +10,10 @@
     
 - Instalando dependencias
    
-   `docker-compose run php-fpm composer install`
+   `docker-compose run --rm php-fpm composer install`
+   
+- Executando as migrations do banco de dados
+
+    `docker-compose run --rm php-fpm vendor/bin/phinx migrate -e development`
+    
+ 

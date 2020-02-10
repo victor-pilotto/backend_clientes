@@ -6,16 +6,10 @@ use Doctrine\ORM\Tools\Setup;
 $container['doctrine'] = static function () {
     $paths = [__DIR__ . '/../../src'];
     $isDevMode = true;
-    $proxyDir = null;
-    $cache = null;
-    $useSimpleAnnotationReader = false;
 
     $config = Setup::createAnnotationMetadataConfiguration(
         $paths,
-        $isDevMode,
-        $proxyDir,
-        $cache,
-        $useSimpleAnnotationReader
+        $isDevMode
     );
 
     $connectionParams = [
@@ -27,6 +21,9 @@ $container['doctrine'] = static function () {
         'driver'   => getenv('DB_DRIVER'),
         'charset'  => 'utf8'
     ];
+//    $connectionParams = [
+//        'url'   => 'mysql://root:123456@192.168.3.244:4003/database'
+//    ];
 
     return EntityManager::create($connectionParams, $config);
 };
