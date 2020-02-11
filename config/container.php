@@ -2,6 +2,7 @@
 
 use App\Domain\Repository\ClienteRepositoryInterface;
 use App\Domain\Repository\UsuarioRepositoryInterface;
+use App\Domain\Service\DeleteCliente;
 use App\Domain\Service\InsereCliente;
 use App\Domain\Service\InsereUsuario;
 use App\Infrastructure\Doctrine\ClienteRepository;
@@ -18,6 +19,9 @@ $container[InsereUsuario::class] = static function (Container $container) {
 };
 $container[InsereCliente::class] = static function (Container $container) {
     return new InsereCliente($container->get(ClienteRepositoryInterface::class));
+};
+$container[DeleteCliente::class] = static function (Container $container) {
+    return new DeleteCliente($container->get(ClienteRepositoryInterface::class));
 };
 
 // Repository

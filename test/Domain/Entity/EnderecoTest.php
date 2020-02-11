@@ -3,6 +3,7 @@
 namespace Test\Domain\Entity;
 
 use App\Application\DTO\EnderecoDTO;
+use App\Domain\Entity\Cliente;
 use App\Domain\Entity\Endereco;
 use Hoa\Iterator\Test\Unit\Mock;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -12,9 +13,13 @@ class EnderecoTest extends TestCase
 {
     private MockObject $enderecoDTO;
 
+    private MockObject $cliente;
+
     public function setUp(): void
     {
         $this->enderecoDTO = $this->getMockBuilder(EnderecoDTO::class)
+            ->disableOriginalConstructor()->getMock();
+        $this->cliente = $this->getMockBuilder(Cliente::class)
             ->disableOriginalConstructor()->getMock();
     }
 
@@ -60,7 +65,7 @@ class EnderecoTest extends TestCase
             ->method('getEstado')
             ->willReturn($params['estado']);
 
-        $endereco = Endereco::fromEnderecoDTOAndCliente($this->enderecoDTO);
+        $endereco = Endereco::fromEnderecoDTOAndCliente($this->enderecoDTO, $this->cliente);
 
         $this->assertEquals($params['cep'], $endereco->getCep());
         $this->assertEquals($params['logradouro'], $endereco->getLogradouro());

@@ -1,5 +1,6 @@
 <?php
 
+use App\Application\Rest\DeleteUsuarioAction;
 use App\Application\Rest\InsereUsuarioAction;
 use App\Application\Rest\LoginAction;
 use App\Application\Middleware;
@@ -17,7 +18,7 @@ $app->post('/cliente', new InsereClienteAction($container));
 
 //$app->put('/cliente/{id}', new InsereUsuarioAction($container));
 //
-//$app->delete('/cliente/{id}', new InsereUsuarioAction($container));
+$app->delete('/cliente/{id}', new DeleteUsuarioAction($container));
 //
 //$app->get('/cliente/{id}', new InsereUsuarioAction($container));
 //$app->get('/cliente', new InsereUsuarioAction($container));

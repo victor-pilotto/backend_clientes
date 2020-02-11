@@ -19,7 +19,7 @@ class Endereco
      * )
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private int $id;
+    private $id;
 
     /**
      * @ORM\Column(
@@ -43,7 +43,7 @@ class Endereco
      *     type="integer"
      * )
      */
-    private string $numero;
+    private int $numero;
 
     /**
      * @ORM\Column(
@@ -59,7 +59,7 @@ class Endereco
      *     type="string"
      * )
      */
-    private string $complemento;
+    private ? string $complemento;
 
     /**
      * @ORM\Column(
@@ -78,7 +78,7 @@ class Endereco
     private string $estado;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cliente")
+     * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="enderecos")
      * @ORM\JoinColumn(name="cliente_id", referencedColumnName="id")
      */
     private Cliente $cliente;
@@ -90,7 +90,7 @@ class Endereco
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId() : int
     {
         return $this->id;
     }
@@ -112,9 +112,9 @@ class Endereco
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getNumero(): string
+    public function getNumero(): int
     {
         return $this->numero;
     }
@@ -128,9 +128,9 @@ class Endereco
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getComplemento(): string
+    public function getComplemento(): ?string
     {
         return $this->complemento;
     }
@@ -157,6 +157,11 @@ class Endereco
     public function getCliente(): Cliente
     {
         return $this->cliente;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return get_object_vars($this);
     }
 
     public static function fromEnderecoDTOAndCliente(EnderecoDTO $enderecoDTO, Cliente $cliente): self

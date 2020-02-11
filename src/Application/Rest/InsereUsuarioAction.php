@@ -27,9 +27,9 @@ class InsereUsuarioAction
     {
         $params = (array)$request->getParams();
 
-        $insereUsuarioDTO = InsereUsuarioDTO::fromArray($params);
+        $insereUsuarioDTO = InsereUsuarioDTO::fromArray($params['data']);
 
-        /** @var $insereUsuario InsereUsuario */
+        /** @var InsereUsuario $insereUsuario */
         $insereUsuario = $this->container->get(InsereUsuario::class);
         $insereUsuario->insere($insereUsuarioDTO);
 

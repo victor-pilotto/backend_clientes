@@ -27,9 +27,9 @@ class InsereClienteAction
     {
         $params = (array)$request->getParams();
 
-        $clienteDTO = ClienteDTO::fromArray($params);
+        $clienteDTO = ClienteDTO::fromArray($params['data']);
 
-        /** @ar $insereCliente InsereCliente */
+        /** @var InsereCliente $insereCliente */
         $insereCliente = $this->container->get(InsereCliente::class);
         $insereCliente->insere($clienteDTO);
 
@@ -37,7 +37,7 @@ class InsereClienteAction
             ->withStatus(200)
             ->withJson([
                 'status_code' => 200,
-                'message' => 'Usuario adicionando com sucesso'
+                'message' => 'Cliente adicionando com sucesso'
             ]);
     }
 }

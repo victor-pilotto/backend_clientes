@@ -5,6 +5,7 @@ namespace App\Infrastructure\Doctrine;
 use App\Domain\Entity\Cliente;
 use App\Domain\Repository\ClienteRepositoryInterface;
 use Doctrine\ORM\EntityManager;
+use App\Domain\Exception;
 
 class ClienteRepository implements ClienteRepositoryInterface
 {
@@ -19,5 +20,31 @@ class ClienteRepository implements ClienteRepositoryInterface
     {
         $this->entityManager->persist($cliente);
         $this->entityManager->flush();
+    }
+
+    /**
+     * @param Cliente $cliente
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function remove(Cliente $cliente): void
+    {
+        $this->entityManager->remove($cliente);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @param string $id
+     * @return Cliente
+     */
+    public function getOneById(string $id): Cliente
+    {
+        $result = $this->entityManager->getRepository(Cliente::class)->find($id);
+
+        if ($result instanceof Cliente) {
+            return $result;
+        }
+
+        throw Exception\ClienteNaoEncontrado::fromId($id);
     }
 }

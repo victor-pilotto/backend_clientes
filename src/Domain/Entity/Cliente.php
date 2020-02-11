@@ -3,6 +3,8 @@
 namespace App\Domain\Entity;
 
 use App\Application\DTO\ClienteDTO;
+use Doctrine\Common\Collections\AbstractLazyCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 
@@ -16,11 +18,11 @@ class Cliente
      * @ORM\Id
      * @ORM\Column(
      *     name="id",
-     *     type="string"
+     *     type="integer"
      * )
-     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private string $id;
+    private $id;
 
     /**
      * @ORM\Column(
@@ -64,15 +66,15 @@ class Cliente
     private string $telefone;
 
     /**
-     * @ORM\OneToMany(targetEntity="Endereco", mappedBy="cliente_id", cascade={"persist", "remove"})
-     * @var PersistentCollection|array|Endereco[]
+     * @ORM\OneToMany(targetEntity="Endereco", mappedBy="cliente", cascade={"persist", "remove"})
+     * @var Endereco[]|ArrayCollection|array
      */
     private $enderecos;
 
     /**
-     * @return string
+     * @return int
      */
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }
@@ -118,15 +120,26 @@ class Cliente
     }
 
     /**
-     * @return Endereco[]|array|PersistentCollection
+     * @return Endereco[]
      */
-    public function getEnderecos()
+    public function getEnderecos(): array
     {
-        if ($this->enderecos instanceof PersistentCollection) {
+        if ($this->enderecos instanceof ArrayCollection) {
             return $this->enderecos->toArray();
         }
 
-        return $this->enderecos;
+        return (array)$this->enderecos;
+    }
+
+    public function jsonSerialize(): array
+    {
+        $props = get_object_vars($this);
+
+        $props['enderecos'] = array_map(static function (Endereco $endereco) {
+            return $endereco->jsonSerialize();
+        }, $this->getEnderecos());
+
+        return $props;
     }
 
     public static function fromClienteDTO(ClienteDTO $clienteDTO): self
