@@ -19,6 +19,40 @@
  
 # Doc
 
+- POST /usuario
+```
+{
+	"data": {
+	"login": "teste",
+	"senha": "senha"
+	}
+}
+```
+```
+Retorno
+{
+  "status_code": 200,
+  "message": "Usuario adicionando com sucesso"
+}
+```
+
+- POST /login
+```
+{
+	"data": {
+		"login": "teste",
+		"senha": "senha"
+	}
+}
+```
+```
+Retorno
+{
+  "status_code": 200,
+  "message": "Login realizado com sucesso"
+}
+```
+
  - POST /cliente
  ```
 {
@@ -56,6 +90,46 @@ Retorno
 {
   "status_code": 200,
   "message": "Cliente adicionando com sucesso"
+}
+```
+
+ - PUT /cliente/{id}
+ ```
+{
+	"data": {
+		"nome": "Victor",
+		"data_nascimento": "1990-07-19",
+		"cpf": "12345678901",
+		"rg": "12456789",
+		"telefone": "22955556666",
+		"enderecos": [
+			{
+				"cep": "12345678",
+				"logradouro": "Rua Teste",
+				"numero": 260,
+				"bairro": "Tester",
+				"complemento": "Padaria",
+				"municipio": "Americana",
+				"estado": "SP"
+			},
+			{
+				"cep": "12345678",
+				"logradouro": "Rua Teste",
+				"numero": 260,
+				"bairro": "Tester",
+				"complemento": "Padaria",
+				"municipio": "Americana",
+				"estado": "SP"
+			}
+		]
+	}
+}
+ ```
+```
+Retorno
+{
+  "status_code": 200,
+  "message": "Cliente atualizado com sucesso"
 }
 ```
 
@@ -98,7 +172,7 @@ Retorno
 }
 ```
 
-- /clientes
+- GET /clientes
 
 ```
 Retorno
@@ -170,7 +244,7 @@ Retorno
 }
 ```
 
-- /cliente/{id}
+- DELETE /cliente/{id}
 ```
 Retorno
 {

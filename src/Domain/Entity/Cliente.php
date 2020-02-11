@@ -64,7 +64,12 @@ class Cliente
     private string $telefone;
 
     /**
-     * @ORM\OneToMany(targetEntity="Endereco", mappedBy="cliente", cascade={"persist", "remove"})
+     * @ORM\OneToMany(
+     *     targetEntity="Endereco",
+     *     mappedBy="cliente",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     *     )
      * @var Endereco[]|PersistentCollection|array
      */
     private $enderecos;
@@ -129,6 +134,15 @@ class Cliente
         return (array)$this->enderecos;
     }
 
+    public function removeEnderecos(): void
+    {
+        foreach ($this->getEnderecos() as $endereco) {
+            if ($this->enderecos instanceof PersistentCollection) {
+                $this->enderecos->removeElement($endereco);
+            }
+        }
+    }
+
     public function jsonSerialize(): array
     {
         $props = get_object_vars($this);
@@ -145,17 +159,27 @@ class Cliente
     {
         $instance = new self;
 
-        $instance->nome = $clienteDTO->getNome();
-        $instance->dataNascimento = new \DateTime($clienteDTO->getDataNascimento());
-        $instance->cpf = $clienteDTO->getCpf();
-        $instance->rg = $clienteDTO->getRg();
-        $instance->telefone = $clienteDTO->getTelefone();
-
-
-        foreach ($clienteDTO->getEnderecos() as $enderecoDTO) {
-            $instance->enderecos[] = Endereco::fromEnderecoDTOAndCliente($enderecoDTO, $instance);
-        }
+        $instance->populate($clienteDTO);
 
         return $instance;
+    }
+
+    public function updateFromDTO(ClienteDTO $clienteDTO): void
+    {
+        $this->populate($clienteDTO);
+    }
+
+    private function populate(ClienteDTO $clienteDTO): void
+    {
+        $this->nome = $clienteDTO->getNome();
+        $this->dataNascimento = new \DateTime($clienteDTO->getDataNascimento());
+        $this->cpf = $clienteDTO->getCpf();
+        $this->rg = $clienteDTO->getRg();
+        $this->telefone = $clienteDTO->getTelefone();
+
+        $this->removeEnderecos();
+        foreach ($clienteDTO->getEnderecos() as $enderecoDTO) {
+            $this->enderecos[] = Endereco::fromEnderecoDTOAndCliente($enderecoDTO, $this);
+        }
     }
 }

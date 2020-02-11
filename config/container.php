@@ -7,6 +7,7 @@ use App\Domain\Service\InsereCliente;
 use App\Domain\Service\InsereUsuario;
 use App\Infrastructure\Doctrine\ClienteRepository;
 use App\Infrastructure\Doctrine\UsuarioRepository;
+use App\Domain\Service\AtualizaCliente;
 use Slim\Container;
 
 /** @var Container */
@@ -19,6 +20,9 @@ $container[InsereUsuario::class] = static function (Container $container) {
 };
 $container[InsereCliente::class] = static function (Container $container) {
     return new InsereCliente($container->get(ClienteRepositoryInterface::class));
+};
+$container[AtualizaCliente::class] = static function (Container $container) {
+    return new AtualizaCliente($container->get(ClienteRepositoryInterface::class));
 };
 $container[DeleteCliente::class] = static function (Container $container) {
     return new DeleteCliente($container->get(ClienteRepositoryInterface::class));

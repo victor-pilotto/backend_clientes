@@ -2,6 +2,7 @@
 
 use App\Application\Middleware;
 use App\Application\Rest\BuscaClienteByIdAction;
+use App\Application\Rest\AtualizaClienteAction;
 use App\Application\Rest\BuscaClientesAction;
 use App\Application\Rest\DeleteClienteAction;
 use App\Application\Rest\InsereClienteAction;
@@ -18,7 +19,7 @@ $app->post('/login', new LoginAction($container));
 $app->post('/usuario', new InsereUsuarioAction($container));
 $app->post('/cliente', new InsereClienteAction($container));
 
-//$app->put('/cliente/{id}', new BuscaClienteByIdAction($container));
+$app->put('/cliente/{id}', new AtualizaClienteAction($container));
 
 $app->delete('/cliente/{id}', new DeleteClienteAction($container));
 

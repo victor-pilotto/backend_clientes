@@ -98,7 +98,7 @@ class Endereco
     /**
      * @return string
      */
-    public function getCep(): string
+    public function getCep() : string
     {
         return $this->cep;
     }
