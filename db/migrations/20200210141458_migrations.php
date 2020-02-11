@@ -36,7 +36,8 @@ class Migrations extends AbstractMigration
             ->addColumn('senha', 'string')
             ->create();
 
-        $this->table('clientes')
+        $this->table('clientes', ['id' => false, 'primary_key' => ['id']])
+            ->addColumn('id', 'string', ['limit' => 45])
             ->addColumn('nome', 'string')
             ->addColumn('data_nascimento', 'datetime')
             ->addColumn('cpf', 'string')
@@ -47,13 +48,14 @@ class Migrations extends AbstractMigration
             ->create();
 
         $this->table('endereco')
+            ->addColumn('cep', 'string')
             ->addColumn('logradouro', 'string')
             ->addColumn('numero', 'integer')
             ->addColumn('bairro', 'string')
-            ->addColumn('complemento', 'string')
+            ->addColumn('complemento', 'string', ['null' => true])
             ->addColumn('municipio', 'string')
             ->addColumn('estado', 'string')
-            ->addColumn('cliente_id', 'integer')
+            ->addColumn('cliente_id', 'string', ['limit' => 45])
             ->addForeignKey('cliente_id', 'clientes', 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE'])
             ->create();
     }

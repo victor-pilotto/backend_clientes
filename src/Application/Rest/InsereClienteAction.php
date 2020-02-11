@@ -2,14 +2,14 @@
 
 namespace App\Application\Rest;
 
-use App\Application\DTO\InsereUsuarioDTO;
-use App\Domain\Service\InsereUsuario;
+use App\Application\DTO\ClienteDTO;
+use App\Domain\Service\InsereCliente;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class InsereUsuarioAction
+class InsereClienteAction
 {
     private ContainerInterface $container;
 
@@ -27,11 +27,11 @@ class InsereUsuarioAction
     {
         $params = (array)$request->getParams();
 
-        $insereUsuarioDTO = InsereUsuarioDTO::fromArray($params);
+        $clienteDTO = ClienteDTO::fromArray($params);
 
-        /** @var $insereUsuario InsereUsuario */
-        $insereUsuario = $this->container->get(InsereUsuario::class);
-        $insereUsuario->insere($insereUsuarioDTO);
+        /** @ar $insereCliente InsereCliente */
+        $insereCliente = $this->container->get(InsereCliente::class);
+        $insereCliente->insere($clienteDTO);
 
         return $response
             ->withStatus(200)

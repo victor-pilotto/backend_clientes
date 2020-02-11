@@ -2,14 +2,13 @@
 
 namespace App\Application\Rest;
 
-use App\Application\DTO\InsereUsuarioDTO;
-use App\Domain\Service\InsereUsuario;
+use App\Domain\Repository\UsuarioRepositoryInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class InsereUsuarioAction
+class LoginAction
 {
     private ContainerInterface $container;
 
@@ -27,17 +26,15 @@ class InsereUsuarioAction
     {
         $params = (array)$request->getParams();
 
-        $insereUsuarioDTO = InsereUsuarioDTO::fromArray($params);
-
-        /** @var $insereUsuario InsereUsuario */
-        $insereUsuario = $this->container->get(InsereUsuario::class);
-        $insereUsuario->insere($insereUsuarioDTO);
+       /** @var $usuarioRepository UsuarioRepositoryInterface */
+        $usuarioRepository = $this->container->get(UsuarioRepositoryInterface::class);
+        $usuarioRepository->getOneByLoginAndSenha($params['login'], $params['senha']);
 
         return $response
             ->withStatus(200)
             ->withJson([
                 'status_code' => 200,
-                'message' => 'Usuario adicionando com sucesso'
+                'message' => 'Login realizado com sucesso'
             ]);
     }
 }
