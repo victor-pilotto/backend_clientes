@@ -161,7 +161,11 @@ class Endereco
 
     public function jsonSerialize(): array
     {
-        return get_object_vars($this);
+        $props = get_object_vars($this);
+
+        unset($props['cliente']);
+
+        return $props;
     }
 
     public static function fromEnderecoDTOAndCliente(EnderecoDTO $enderecoDTO, Cliente $cliente): self

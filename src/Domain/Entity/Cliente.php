@@ -37,7 +37,7 @@ class Cliente
      *     name="data_nascimento",
      *     type="datetime"
      * )
-     * @var \DateTimeImmutable
+     * @var \DateTime
      */
     private $dataNascimento;
 
@@ -67,7 +67,7 @@ class Cliente
 
     /**
      * @ORM\OneToMany(targetEntity="Endereco", mappedBy="cliente", cascade={"persist", "remove"})
-     * @var Endereco[]|ArrayCollection|array
+     * @var Endereco[]|PersistentCollection|array
      */
     private $enderecos;
 
@@ -88,9 +88,9 @@ class Cliente
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return \DateTime
      */
-    public function getDataNascimento(): \DateTimeImmutable
+    public function getDataNascimento(): \DateTime
     {
         return $this->dataNascimento;
     }
@@ -124,7 +124,7 @@ class Cliente
      */
     public function getEnderecos(): array
     {
-        if ($this->enderecos instanceof ArrayCollection) {
+        if ($this->enderecos instanceof PersistentCollection) {
             return $this->enderecos->toArray();
         }
 
@@ -135,6 +135,7 @@ class Cliente
     {
         $props = get_object_vars($this);
 
+        $props['dataNascimento'] = $this->getDataNascimento()->format('Y-m-d');
         $props['enderecos'] = array_map(static function (Endereco $endereco) {
             return $endereco->jsonSerialize();
         }, $this->getEnderecos());
@@ -147,7 +148,7 @@ class Cliente
         $instance = new self;
 
         $instance->nome = $clienteDTO->getNome();
-        $instance->dataNascimento = new \DateTimeImmutable($clienteDTO->getDataNascimento());
+        $instance->dataNascimento = new \DateTime($clienteDTO->getDataNascimento());
         $instance->cpf = $clienteDTO->getCpf();
         $instance->rg = $clienteDTO->getRg();
         $instance->telefone = $clienteDTO->getTelefone();

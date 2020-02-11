@@ -34,10 +34,10 @@ class ClienteRepository implements ClienteRepositoryInterface
     }
 
     /**
-     * @param string $id
+     * @param int $id
      * @return Cliente
      */
-    public function getOneById(string $id): Cliente
+    public function getOneById(int $id): Cliente
     {
         $result = $this->entityManager->getRepository(Cliente::class)->find($id);
 
@@ -46,5 +46,13 @@ class ClienteRepository implements ClienteRepositoryInterface
         }
 
         throw Exception\ClienteNaoEncontrado::fromId($id);
+    }
+
+    /**
+     * @return array
+     */
+    public function findAll(): array
+    {
+        return $this->entityManager->getRepository(Cliente::class)->findAll();
     }
 }

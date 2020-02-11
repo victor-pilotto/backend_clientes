@@ -1,11 +1,13 @@
 <?php
 
-use App\Application\Rest\DeleteUsuarioAction;
+use App\Application\Middleware;
+use App\Application\Rest\BuscaClienteByIdAction;
+use App\Application\Rest\BuscaClientesAction;
+use App\Application\Rest\DeleteClienteAction;
+use App\Application\Rest\InsereClienteAction;
 use App\Application\Rest\InsereUsuarioAction;
 use App\Application\Rest\LoginAction;
-use App\Application\Middleware;
 use Slim\Container;
-use App\Application\Rest\InsereClienteAction;
 
 /** @var Container $container */
 $container = $app->getContainer();
@@ -16,10 +18,10 @@ $app->post('/login', new LoginAction($container));
 $app->post('/usuario', new InsereUsuarioAction($container));
 $app->post('/cliente', new InsereClienteAction($container));
 
-//$app->put('/cliente/{id}', new InsereUsuarioAction($container));
-//
-$app->delete('/cliente/{id}', new DeleteUsuarioAction($container));
-//
-//$app->get('/cliente/{id}', new InsereUsuarioAction($container));
-//$app->get('/cliente', new InsereUsuarioAction($container));
+//$app->put('/cliente/{id}', new BuscaClienteByIdAction($container));
+
+$app->delete('/cliente/{id}', new DeleteClienteAction($container));
+
+$app->get('/cliente/{id}', new BuscaClienteByIdAction($container));
+$app->get('/clientes', new BuscaClientesAction($container));
 

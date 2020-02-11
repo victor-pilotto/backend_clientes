@@ -30,7 +30,8 @@
     "beberlei/assert": "^3.2",
     "doctrine/orm": "^2.6.2",
     "robmorgan/phinx": "^0.11.4",
-    "squizlabs/php_codesniffer": "*"
+    "squizlabs/php_codesniffer": "*",
+    "icanboogie/inflector": "^2.0"
   },
   "scripts": {
     "check": [

@@ -17,8 +17,13 @@ interface ClienteRepositoryInterface
     public function remove(Cliente $cliente): void;
 
     /**
-     * @param string $id
+     * @param int $id
      * @return Cliente
      */
-    public function getOneById(string $id): Cliente;
+    public function getOneById(int $id): Cliente;
+
+    /**
+     * @return array
+     */
+    public function findAll(): array;
 }

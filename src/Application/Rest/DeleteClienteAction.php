@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class DeleteUsuarioAction
+class DeleteClienteAction
 {
     private ContainerInterface $container;
 
