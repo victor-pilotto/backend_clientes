@@ -3,8 +3,6 @@
 namespace App\Domain\Entity;
 
 use App\Application\DTO\ClienteDTO;
-use Doctrine\Common\Collections\AbstractLazyCollection;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 
