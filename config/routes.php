@@ -1,8 +1,8 @@
 <?php
 
 use App\Application\Middleware;
-use App\Application\Rest\BuscaClienteByIdAction;
 use App\Application\Rest\AtualizaClienteAction;
+use App\Application\Rest\BuscaClienteByIdAction;
 use App\Application\Rest\BuscaClientesAction;
 use App\Application\Rest\DeleteClienteAction;
 use App\Application\Rest\InsereClienteAction;
@@ -13,7 +13,7 @@ use Slim\Container;
 /** @var Container $container */
 $container = $app->getContainer();
 
-//$app->add(new Middleware\ErrorHandler());
+$app->add(new Middleware\ErrorHandler());
 
 $app->post('/login', new LoginAction($container));
 $app->post('/usuario', new InsereUsuarioAction($container));
