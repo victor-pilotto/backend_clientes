@@ -39,10 +39,8 @@ Retorno
 - POST /login
 ```
 {
-	"data": {
-		"login": "teste",
-		"senha": "senha"
-	}
+    "login": "teste",
+    "senha": "senha"
 }
 ```
 ```
@@ -56,33 +54,31 @@ Retorno
  - POST /cliente
  ```
 {
-	"data": {
-		"nome": "Victor",
-		"data_nascimento": "1990-07-19",
-		"cpf": "12345678901",
-		"rg": "12456789",
-		"telefone": "22955556666",
-		"enderecos": [
-			{
-				"cep": "12345678",
-				"logradouro": "Rua Teste",
-				"numero": 260,
-				"bairro": "Tester",
-				"complemento": "Padaria",
-				"municipio": "Americana",
-				"estado": "SP"
-			},
-			{
-				"cep": "12345678",
-				"logradouro": "Rua Teste",
-				"numero": 260,
-				"bairro": "Tester",
-				"complemento": "Padaria",
-				"municipio": "Americana",
-				"estado": "SP"
-			}
-		]
-	}
+    "nome": "Victor",
+    "data_nascimento": "1990-07-19",
+    "cpf": "12345678901",
+    "rg": "12456789",
+    "telefone": "22955556666",
+    "enderecos": [
+        {
+            "cep": "12345678",
+            "logradouro": "Rua Teste",
+            "numero": 260,
+            "bairro": "Tester",
+            "complemento": "Padaria",
+            "municipio": "Americana",
+            "estado": "SP"
+        },
+        {
+            "cep": "12345678",
+            "logradouro": "Rua Teste",
+            "numero": 260,
+            "bairro": "Tester",
+            "complemento": "Padaria",
+            "municipio": "Americana",
+            "estado": "SP"
+        }
+    ]
 }
  ```
 ```
@@ -96,33 +92,31 @@ Retorno
  - PUT /cliente/{id}
  ```
 {
-	"data": {
-		"nome": "Victor",
-		"data_nascimento": "1990-07-19",
-		"cpf": "12345678901",
-		"rg": "12456789",
-		"telefone": "22955556666",
-		"enderecos": [
-			{
-				"cep": "12345678",
-				"logradouro": "Rua Teste",
-				"numero": 260,
-				"bairro": "Tester",
-				"complemento": "Padaria",
-				"municipio": "Americana",
-				"estado": "SP"
-			},
-			{
-				"cep": "12345678",
-				"logradouro": "Rua Teste",
-				"numero": 260,
-				"bairro": "Tester",
-				"complemento": "Padaria",
-				"municipio": "Americana",
-				"estado": "SP"
-			}
-		]
-	}
+    "nome": "Victor",
+    "data_nascimento": "1990-07-19",
+    "cpf": "12345678901",
+    "rg": "12456789",
+    "telefone": "22955556666",
+    "enderecos": [
+        {
+            "cep": "12345678",
+            "logradouro": "Rua Teste",
+            "numero": 260,
+            "bairro": "Tester",
+            "complemento": "Padaria",
+            "municipio": "Americana",
+            "estado": "SP"
+        },
+        {
+            "cep": "12345678",
+            "logradouro": "Rua Teste",
+            "numero": 260,
+            "bairro": "Tester",
+            "complemento": "Padaria",
+            "municipio": "Americana",
+            "estado": "SP"
+        }
+    ]
 }
  ```
 ```

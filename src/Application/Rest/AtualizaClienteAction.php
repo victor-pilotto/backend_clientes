@@ -28,7 +28,7 @@ class AtualizaClienteAction
     {
         $params = (array)$request->getParams();
 
-        $clienteDTO = ClienteDTO::fromArray($params['data']);
+        $clienteDTO = ClienteDTO::fromArray($params);
 
         /** @var AtualizaCliente $insereCliente */
         $insereCliente = $this->container->get(AtualizaCliente::class);

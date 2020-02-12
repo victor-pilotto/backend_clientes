@@ -27,7 +27,7 @@ class InsereClienteAction
     {
         $params = (array)$request->getParams();
 
-        $clienteDTO = ClienteDTO::fromArray($params['data']);
+        $clienteDTO = ClienteDTO::fromArray($params);
 
         /** @var InsereCliente $insereCliente */
         $insereCliente = $this->container->get(InsereCliente::class);

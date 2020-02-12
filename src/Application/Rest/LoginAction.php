@@ -25,11 +25,10 @@ class LoginAction
     public function __invoke(Request $request, Response $response): ResponseInterface
     {
         $params = (array)$request->getParams();
-        $dados = $params['data'];
 
        /** @var UsuarioRepositoryInterface $usuarioRepository */
         $usuarioRepository = $this->container->get(UsuarioRepositoryInterface::class);
-        $usuarioRepository->getOneByLoginAndSenha($dados['login'], $dados['senha']);
+        $usuarioRepository->getOneByLoginAndSenha($params['login'], $params['senha']);
 
         return $response
             ->withStatus(200)
