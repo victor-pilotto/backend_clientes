@@ -1,5 +1,12 @@
 # Backend
 
+### Requisitos
+
+- [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Instalação
+
 - Criando as docker
     
     `docker-compose build`
@@ -17,15 +24,13 @@
     `docker-compose run --rm php-fpm vendor/bin/phinx migrate -e development`
     
  
-# Doc
+### Doc
 
 - POST /usuario
 ```
 {
-	"data": {
 	"login": "teste",
 	"senha": "senha"
-	}
 }
 ```
 ```
