@@ -33,7 +33,7 @@ class ErrorHandler
                 ->withJson([
                     'status_code' => 500,
                     'type' => 'InternalError',
-                    'message' => [ 'Internal server error' ],
+                    'message' => [ $e->getMessage() ],
                 ]);
         }
 

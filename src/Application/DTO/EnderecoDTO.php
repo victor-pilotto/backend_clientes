@@ -2,6 +2,8 @@
 
 namespace App\Application\DTO;
 
+use Assert\Assertion;
+
 class EnderecoDTO
 {
     private string $cep;
@@ -85,6 +87,9 @@ class EnderecoDTO
     public static function fromArray(array $params): self
     {
         $instance = new self;
+
+        Assertion::numeric($params['numero'], 'Numero precisa ser um valor numerico');
+        Assertion::numeric($params['cep'], 'Cep precisa ser um valor numerico');
 
         $instance->cep = $params['cep'];
         $instance->logradouro = $params['logradouro'];
